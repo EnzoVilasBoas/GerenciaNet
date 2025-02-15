@@ -178,13 +178,13 @@ class Sistema extends Dbasis
 
 			$idusuario = filter_var($id, FILTER_VALIDATE_INT);
 
-			$readAutUser = Dbasis::read('usuarios', 'id="' . $idusuario . '"');
+			$readAutUser = Dbasis::read('users', 'id="' . $idusuario . '"');
 
 			if ($readAutUser) {
 
 				foreach ($readAutUser as $autUser);
 
-				header('Authorization: ' . md5('Portfolio'));
+				header('Authorization: ' . md5('GerenciaNet'));
 
 				unset($autUser['senha']);
 

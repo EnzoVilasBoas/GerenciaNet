@@ -7,15 +7,13 @@ require_once('config/autoload.php');
 
 $sis = new Sistema;
 
-$sis->debug(false);
+$sis->debug(true);
 
 /**
  * Funcao AutUser so deve ser usada em paginas onde o login e obrigatorio
  * Caso contrario alterar a funcao para nao redirecionar
  */
-if ($_SESSION['AutUser']['id']) {
-	$autUser = $sis->AutUser($_SESSION['AutUser']['id']);
-}
+$sis -> AutUser($_SESSION["AutUser"]["id"]);
 
 $sis->api();
 ?>

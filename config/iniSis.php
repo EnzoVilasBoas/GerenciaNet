@@ -1,4 +1,18 @@
 <?php
+class Environment{
+    /**
+     * Carrega variáveis de ambiente 
+     * **/
+    public static function load($diretorio){
+         $file = file($diretorio.'.env');
+        foreach($file as $file){
+            putenv(trim($file));
+        }
+    }
+}
+
+Environment::load(__DIR__.'/../');
+
 define("TITULO",getenv('TITULO'));
 define("DESCRICAO",getenv('DESCRICAO'));
 define("AUTOR",getenv('AUTOR'));
