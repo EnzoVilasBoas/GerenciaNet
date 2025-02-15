@@ -1,0 +1,31 @@
+# Ativa o uso de URL amigavel
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+Rewriterule ^(.*)$ index.php?url=$1
+
+# Bloqueia a listagem de diretórios.
+Options All -Indexes
+
+# Mensagem de erro personalizada.
+ErrorDocument 403 "Desculpe! acesso nao permitido!"
+ErrorDocument 404 "Desculpe! Arquivo nao encontrado!"
+ErrorDocument 500 "Falha no codigo!"
+
+# Redireciona para o HTTPS independente do domínio
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+SetEnv HOST "DB_HOST"
+SetEnv USER "DB_USER"
+SetEnv PASS "DB_PASS"
+SetEnv DBSA "DB_NAME"
+SetEnv BASE "SITE_URL"
+SetEnv MAILUSER "SMPT_USER"
+SetEnv MAILPASS "SMTP_PASS"
+SetEnv MAILPORT 465
+SetEnv MAILHOST "SMTP_HOST"
+SetEnv TITULO "SITE_TITLE"
+SetEnv DESCRICAO "SITE_DEC"
+SetEnv LOG true
+SetEnv VERSION 1
