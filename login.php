@@ -7,7 +7,7 @@ require_once('config/autoload.php');
 
 $sis = new Sistema;
 
-$sis->debug(FALSE);
+$sis->debug(true);
 
 $aut = new AutUser;
 
@@ -38,27 +38,59 @@ if ($cookie) {
 
 $post = $sis->getPost();
 if ($post) {
-    $login = $aut->login($post);
-    switch ($login) {
-        case 1:
-            $msg =
-                '<div class="alert alert-success" role="alert">
-                    Autenticado com sucesso, Redirecionando...
-                    <meta http-equiv="refresh" content="5;url=' . BASE . '">
-                </div>';
-            break;
-        case 2:
-            $msg =
-                '<div class="alert alert-warning" role="alert">
-                    E-mail ou senha incorretos, verifique e tente novamente.
-                </div>';
-            break;
-        default:
-            $msg =
-                '<div class="alert alert-danger" role="alert">
-                    <span class="alert-link">ERRO</span>! Tente novamente ou entre em contato com  o suporte.
-                </div>';
-            break;
+    var_dump($post);
+    if (isset($post["submitCad"])) {
+        $cad = $aut -> cadastra($post);
+        switch ($cad) {
+            case 1:
+                $msg =
+                    '<div class="alert alert-warning" role="alert">
+                        O email informado ja esta cadastrado, caso necessario recupere sua senha aqui.
+                    </div>';
+                break;
+            case 2:
+                $msg =
+                    '<div class="alert alert-warning" role="alert">
+                        As senhas nao conferem, preencha e tente novamente.
+                    </div>';
+                break;
+            case 3:
+                $msg =
+                    '<div class="alert alert-success" role="alert">
+                        Cadastrado com sucesso, preencha os campos abaixo para se autenticar.
+                    </div>';
+                break;
+            default:
+                $msg =
+                    '<div class="alert alert-danger" role="alert">
+                        <span class="alert-link">ERRO</span>! Tente novamente ou entre em contato com  o suporte.
+                    </div>';
+                break;
+        }
+    }
+    if (isset($post["submitLogin"])) {
+        $login = $aut->login($post);
+        switch ($login) {
+            case 1:
+                $msg =
+                    '<div class="alert alert-success" role="alert">
+                        Autenticado com sucesso, Redirecionando...
+                        <meta http-equiv="refresh" content="5;url=' . BASE . '">
+                    </div>';
+                break;
+            case 2:
+                $msg =
+                    '<div class="alert alert-warning" role="alert">
+                        E-mail ou senha incorretos, verifique e tente novamente.
+                    </div>';
+                break;
+            default:
+                $msg =
+                    '<div class="alert alert-danger" role="alert">
+                        <span class="alert-link">ERRO</span>! Tente novamente ou entre em contato com  o suporte.
+                    </div>';
+                break;
+        }
     }
 }
 ?>
@@ -90,6 +122,7 @@ if ($post) {
         <div class="container-fluid my-5 my-lg-0">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
+                    <?= $msg ?? null ?>
                     <div class="card rounded-4 mb-0">
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item">
@@ -102,7 +135,6 @@ if ($post) {
                                     <div class="card-body p-5">
                                         <!-- <img src="assets/images/logo1.png" class="mb-4" width="145" alt=""> -->
                                         <p class="mb-0">Insira suas credenciais para fazer login em sua conta</p>
-                                        <?= $msg ?? null ?>
                                         <div class="form-body my-5">
                                             <form class="row g-3" method="post">
                                                 <div class="col-12">
@@ -113,7 +145,7 @@ if ($post) {
                                                     <label for="inputChoosePassword" class="form-label">Senha</label>
                                                     <div class="input-group" id="show_hide_password">
                                                         <input type="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password" name="senha">
-                                                        <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
+                                                        <a href="javascript:;" class="input-group-text bg-transparent" data-pass="inputChoosePassword" data-eye="loginPass"><i class="bi bi-eye-slash-fill" id="loginPass"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -126,7 +158,7 @@ if ($post) {
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="submit" class="btn btn-grd-primary">Login</button>
+                                                <button type="submit" class="btn btn-grd-primary" name="submitLogin">Login</button>
                                             </div>
                                         </div>
                                         </form>
@@ -143,7 +175,6 @@ if ($post) {
                                     <div class="card-body p-5">
                                         <!-- <img src="assets/images/logo1.png" class="mb-4" width="145" alt=""> -->
                                         <p class="mb-0">Insira suas dados para cadastrar sua conta</p>
-                                        <?= $msg ?? null ?>
                                         <div class="form-body my-5">
                                             <form class="row g-3" method="post">
                                                 <div class="col-12">
@@ -159,16 +190,23 @@ if ($post) {
                                                     <input type="text" class="form-control" id="InputTelefone" placeholder="11993269781" name="phone">
                                                 </div>
                                                 <div class="col-12">
-                                                    <label for="InputSenha" class="form-label">Senha</label>
+                                                    <label for="InputCadPass" class="form-label">Senha</label>
                                                     <div class="input-group" id="show_hide_password">
-                                                        <input type="password" class="form-control border-end-0" id="InputSenha" placeholder="Enter Password" name="pass">
-                                                        <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
+                                                        <input type="password" class="form-control border-end-0" id="InputCadPass" placeholder="Enter Password" name="cadPass">
+                                                        <a href="javascript:;" class="input-group-text bg-transparent" data-pass="InputCadPass" data-eye="cadPass"><i class="bi bi-eye-slash-fill" id="cadPass"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="InputConPass" class="form-label">Confirme sua senha</label>
+                                                    <div class="input-group" id="show_hide_password">
+                                                        <input type="password" class="form-control border-end-0" id="InputConPass" placeholder="Enter Password" name="conPass">
+                                                        <a href="javascript:;" class="input-group-text bg-transparent" data-pass="InputConPass" data-eye="conPass"><i class="bi bi-eye-slash-fill" id="conPass"></i></a>
                                                     </div>
                                                 </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="submit" class="btn btn-grd-primary">Cadastrar-se</button>
+                                                <button type="submit" class="btn btn-grd-primary" name="submitCad">Cadastrar-se</button>
                                             </div>
                                         </div>
                                         </form>
@@ -188,14 +226,16 @@ if ($post) {
         $(document).ready(function() {
             $("#show_hide_password a").on('click', function(event) {
                 event.preventDefault();
-                if ($('#show_hide_password input').attr("type") == "text") {
-                    $('#show_hide_password input').attr('type', 'password');
-                    $('#show_hide_password i').addClass("bi-eye-slash-fill");
-                    $('#show_hide_password i').removeClass("bi-eye-fill");
-                } else if ($('#show_hide_password input').attr("type") == "password") {
-                    $('#show_hide_password input').attr('type', 'text');
-                    $('#show_hide_password i').removeClass("bi-eye-slash-fill");
-                    $('#show_hide_password i').addClass("bi-eye-fill");
+                var idPass = $(this).attr('data-pass');
+                var idEye = $(this).attr('data-eye');
+                if ($('#'+idPass).attr("type") == "text") {
+                    $('#'+idPass).attr('type', 'password');
+                    $('#'+idEye).addClass("bi-eye-slash-fill");
+                    $('#'+idEye).removeClass("bi-eye-fill");
+                } else if ($('#'+idPass).attr("type") == "password") {
+                    $('#'+idPass).attr('type', 'text');
+                    $('#'+idEye).removeClass("bi-eye-slash-fill");
+                    $('#'+idEye).addClass("bi-eye-fill");
                 }
             });
         });

@@ -686,3 +686,6 @@ input:-webkit-autofill {
 	border-color: unset !important;
 	box-shadow: none !important;
 }
+body .sticky-header	{
+	backdrop-filter: blur(1rem) !important;
+}
