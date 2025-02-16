@@ -7,3 +7,4 @@ sftp.json
 /template
 template
 .template
+*.env
