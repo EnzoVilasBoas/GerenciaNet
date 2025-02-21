@@ -187,7 +187,7 @@ if ($post) {
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="InputTelefone" class="form-label">Telefone</label>
-                                                    <input type="text" class="form-control" id="InputTelefone" placeholder="11993269781" name="phone">
+                                                    <input type="text" class="form-control tel-mask" id="InputTelefone" placeholder="11993269781" name="phone">
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="InputCadPass" class="form-label">Senha</label>
@@ -222,6 +222,7 @@ if ($post) {
     </div>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/js.js"></script>
     <script>
         $(document).ready(function() {
             $("#show_hide_password a").on('click', function(event) {
