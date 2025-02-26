@@ -7,11 +7,15 @@ $parametro  = $sis->getParametros()[2] ?? null;
 $post       = $sis->getPost();
 
 switch ($acao) {
-    case 'value':
-        # code...
-        break;
-    
     default:
+        if ($post) {
+            var_dump($post);
+            if($post["password"]) {
+                echo "Senha vazia";
+            } else {
+                echo "Senha preenchida";
+            }
+        }
         $u = $perfil -> user($autUser["id"]);
         require_once("view/perfil.php");
         break;

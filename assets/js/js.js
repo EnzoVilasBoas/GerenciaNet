@@ -5,24 +5,7 @@ $(document).ready(function() {
     //
     // GERAL
     //
-        /**
-         * Funcao responsavel por mascarar o numero de telefone
-         */
-        $('.tel-mask').on('input', function() {
-            let telefone = $(this).val();
-            
-            // Remove tudo que não for número
-            telefone = telefone.replace(/\D/g, '');
-
-            // Aplica a máscara dinamicamente
-            if (telefone.length <= 10) {
-                telefone = telefone.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
-            } else {
-                telefone = telefone.replace(/^(\d{2})(\d{5})(\d{0,4})$/, "($1) $2-$3");
-            }
-
-            $(this).val(telefone);
-        });
+        $('#InputTelefone').mask('(00) 00000-0000');
         /**
          * Funcao responsavel por fechar modais
          */

@@ -602,6 +602,7 @@ $sis->api();
   </script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/dashboard1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
   <script src="assets/js/js.js"></script>
   <script>
 	   new PerfectScrollbar(".user-list")
