@@ -22,13 +22,13 @@
                             <h5 class="mb-0 fw-bold">Edit Profile</h5>
                         </div>
                     </div>
-                    <form class="row g-4" method="post">
+                    <form class="row g-4" method="post" enctype="multipart/form-data">
                         <div class="mb-5 position-absolute start-50 translate-middle" style="width: 170px;height: 170px;bottom: 60%;" id="A_avatar">
                             <div class="profile-avatar">
-                                <img src="assets/images/avatars/01.png" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt="">
+                                <img src="<?= BASE ?>/uploads/avatars/<?= $u["avatar_url"] ? $u["avatar_url"] : "avatar.png" ?>" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt="">
                             </div>
                             <label for="avatar" id="A_avatarCover" class="">Alterar foto</label>
-                            <input type="file" class="form-control" id="avatar" style="display: none;">
+                            <input type="file" class="form-control" id="avatar" style="display: none;" name="avatar">
                         </div>
                         <div class="col-md-12">
                             <label for="input1" class="form-label">Nome</label>
@@ -45,11 +45,17 @@
                         </div>
                         <div class="col-md-12">
                             <label for="input5" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="input5" autocomplete="new-password" name="password_hash">
+                            <input type="password" class="form-control" id="input5" autocomplete="new-password" name="pass">
                         </div>
                         <div class="col-md-12">
                             <div class="d-md-flex d-grid align-items-center gap-3">
-                                <button type="submit" class="btn btn-grd-primary px-4">Atualizar perfil</button>
+                                <?php 
+                                    if (isset($msg)) {
+                                        echo $msg;
+                                    }else {
+                                        echo '<button type="submit" class="btn btn-grd-primary px-4">Atualizar perfil</button>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </form>

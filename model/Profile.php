@@ -15,4 +15,20 @@
                 return $u;
             }
         }
+
+        /**
+         * Metodo responsavel pela atualizacao do usuario
+         * @param array $data
+         * @param int $userId
+         * @return int
+         */
+        public function userUpdate(array $data, int $userId) {
+            $user = Dbasis::read("users","id = $userId");
+            if (!$user -> num_rows) {
+                return 0;
+            }else {
+                $update = Dbasis::update("users",$data,"id = $userId");
+                return $update;
+            }
+        }
     }

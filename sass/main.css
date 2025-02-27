@@ -1601,4 +1601,14 @@ form select.error:focus {
 #A_avatar:hover label {
   opacity: 1; /* Aparece no hover */
 }
+
+@keyframes fadeOut {
+  0% { opacity: 1; display: block; }
+  100% { opacity: 0; display: none; }
+}
+
+#A_alerta {
+  animation: fadeOut 8s ease-in-out forwards;
+}
+
 /*# sourceMappingURL=main.css.map */

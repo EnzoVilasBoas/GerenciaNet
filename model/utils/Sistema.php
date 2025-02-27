@@ -281,8 +281,9 @@ class Sistema extends Dbasis
 	 */
 	public function uploadImage($tmp, $nome, $width, $height=NULL, $pasta){
 	
-		$ext  = pathinfo($pasta.$nome);
-		switch (strtolower($ext['extension'])){
+		$exp	= explode('.', $nome);
+		$ext	= end($exp);
+		switch (strtolower($ext)){
 			case 'jpg'; $img = imagecreatefromjpeg($tmp);break;
 			case 'jpeg'; $img = imagecreatefromjpeg($tmp);break;
 			case 'png'; $img = imagecreatefrompng($tmp);break;
@@ -299,7 +300,7 @@ class Sistema extends Dbasis
 		imagesavealpha ($nova,true);
 		imagecopyresampled($nova, $img, 0, 0, 0, 0, $width, $height, $x, $y);
 	
-		switch (strtolower($ext['extension'])){
+		switch (strtolower($ext)){
 			case 'jpg';  imagejpeg($nova, $pasta.$nome, 100);break;
 			case 'jpeg'; imagejpeg($nova, $pasta.$nome, 100);break;
 			case 'png';  imagepng($nova, $pasta.$nome);break;
