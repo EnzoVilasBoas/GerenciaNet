@@ -1,15 +1,6 @@
 <div class="main-content">
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Painel</div>
-        <div class="ps-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Home</li>
-                </ol>
-            </nav>
-        </div>
     </div>
     <div class="row">
         <div class="col-xxl-12 d-flex align-items-stretch">
@@ -18,7 +9,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-7">
                             <div class="d-flex align-items-center gap-3 mb-5">
-                                <img src="assets/images/avatars/01.png" class="rounded-circle bg-grd-info p-1" width="60" height="60" alt="user">
+                                <img src="<?= BASE ?>/uploads/avatars/<?= $autUser["avatar_url"] ? $autUser["avatar_url"] : "avatar.png" ?>" class="rounded-circle bg-grd-info p-1" width="60" height="60" alt="user">
                                 <div class="">
                                     <p class="mb-0 fw-semibold">Bem-vindo de volta</p>
                                     <h4 class="fw-semibold mb-0 fs-4 mb-0"><?= $autUser["name"] ?>!</h4>

@@ -2,14 +2,6 @@
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Perfil</div>
-        <div class="ps-3">
-            <nav aria-label="breadcrumb">
-                <a class="breadcrumb mb-0 p-0" href="<?= BASE ?>">
-                    <li class="breadcrumb-item"></li>
-                    <li class="breadcrumb-item active" aria-current="page">Home</li>
-                </a>
-            </nav>
-        </div>
     </div>
     <!--end breadcrumb-->
 

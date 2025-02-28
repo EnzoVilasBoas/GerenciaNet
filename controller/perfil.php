@@ -27,7 +27,7 @@ switch ($acao) {
             }
             $up = $perfil->userUpdate($cad, $autUser["id"]);
             if ($up) {
-                $msg = '<div class="alert alert-success border-0 bg-grd-success alert-dismissible fade show w-100" role="alert" id="A_alerta">
+                $msg = '<div class="alert alert-success border-0 bg-grd-success alert-dismissible fade show w-100" role="alert">
                             <div class="d-flex align-items-center">
                                 <div class="font-35 text-white"><span class="material-icons-outlined fs-2">check_circle</span>
                                 </div>

@@ -126,4 +126,37 @@ class Dbasis{
             return $stRead;
         }
     }
+
+    /**
+     * Método responsável pela leitura paginada da tabela
+     * @param string $tabela
+     * @param string $cond
+     * @param int $limit Número máximo de resultados por página
+     * @param int $offset Posição inicial dos resultados
+     * @return bool/array Resultado da query ou false em caso de falha
+     */
+    public function readPag($tabela, $cond = NULL, $limit = 10, $offset = 0)
+    {
+        $conn = mysqli_connect(HOST, USER, PASS, DBSA) or die('Erro ao conectar: ');
+
+        // Monta a query com condições, limites e offset
+        if ($cond) {
+            $qrRead = "SELECT * FROM {$tabela} {$cond} LIMIT {$limit} OFFSET {$offset}";
+        } else {
+            $qrRead = "SELECT * FROM {$tabela} LIMIT {$limit} OFFSET {$offset}";
+        }
+
+        if (LOG) {
+            $stRead = mysqli_query($conn, $qrRead) or die('<div class="alert alert-danger">Falha na execução do comando. Entre em contato com o suporte!</div>'
+                . Dbasis::logAcesso(BASE . '/logbderro.txt', "ERRO NA READ, " . $_SERVER['REQUEST_URI'] . ", DATA: " . date('Y-m-d H:i:s') . " , TABELA: $tabela, QUERY:  $qrRead  " . mysqli_error($conn)));
+        } else {
+            $stRead = mysqli_query($conn, $qrRead) or die('<div class="alert alert-danger">Falha na execução do comando. Entre em contato com o suporte!</div>');
+        }
+
+        if (isset($stRead)) {
+            return $stRead;
+        }
+
+        return false;
+    }
 }

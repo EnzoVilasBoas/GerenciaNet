@@ -477,7 +477,7 @@ input::placeholder {
   background-color: rgba(0, 140, 255, 0.05);
 }
 .sidebar-wrapper .menu-label {
-  padding: 10px 16px 10px 16px;
+  padding: 0px 16px 0px 16px;
   color: #b0afaf;
   text-transform: uppercase;
   font-size: 12px;
