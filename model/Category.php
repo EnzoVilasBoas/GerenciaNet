@@ -1,6 +1,6 @@
 <?php
 
-class Categoria extends Dbasis
+class Category extends Dbasis
 {
     /**
      * Funcao responsavel pelo retorno das categorias
@@ -11,7 +11,7 @@ class Categoria extends Dbasis
     public function list(int $userId, int $pag = 1)
     {
         $offset = 5 * $pag;
-        $list = Dbasis::readPag("menu_categories", "WHERE user_id = $userId ORDER BY id ASC", 5, $offset);
+        $list = Dbasis::readPag("menu_categories", "WHERE user_id = $userId", 5, $offset);
         if ($list->num_rows > 0) {
             return $list;
         } else {
@@ -60,5 +60,43 @@ class Categoria extends Dbasis
         $html .= '</ul></nav>';
 
         return $html;
+    }
+
+    /**
+     * Metodo responsavel pelo cadastro de categorias
+     * @param array $post
+     * @return int
+     */
+    public function categoryCreate(array  $post) {
+        $insert = Dbasis::create("menu_categories", $post);
+        return $insert;
+    }
+
+    /**
+     * Metodo responsavel pela leitura de uma categoria
+     * @param int $id
+     * @param int $userId
+     * @return array/int
+     */
+    public function categoryRead(int $categoryId,int $userId) {
+        $read = Dbasis::read("menu_categories", 'id = "'.$categoryId.'" AND user_id = "'.$userId.'"');
+        if ($read->num_rows) {
+            foreach ($read as $r);
+            return $r;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Metodo responsavel pela atualizacao de uma categoria
+     * @param array $post
+     * @param int $id
+     * @param int $userId
+     * @return int
+     */
+    public function categoryUpdate(array $post, int $id, int $userId) {
+        $update = Dbasis::update("menu_categories", $post, 'id = "'.$id.'" AND user_id = "'.$userId.'"');
+        return $update;
     }
 }
