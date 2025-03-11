@@ -68,8 +68,12 @@ class Category extends Dbasis
      * @return int
      */
     public function categoryCreate(array  $post) {
-        $insert = Dbasis::create("menu_categories", $post);
-        return $insert;
+        $read = Dbasis::read("menu_categories", 'name = "'.$post["name"].'" AND user_id = "'.$post["user_id"].'"');
+        if (!$read->num_rows) {
+            $insert = Dbasis::create("menu_categories", $post);
+            return $insert;
+        }
+        return 0;
     }
 
     /**
@@ -98,5 +102,20 @@ class Category extends Dbasis
     public function categoryUpdate(array $post, int $id, int $userId) {
         $update = Dbasis::update("menu_categories", $post, 'id = "'.$id.'" AND user_id = "'.$userId.'"');
         return $update;
+    }
+
+    /**
+     * Metodo responsavel pela exclusao de uma categoria
+     * @param int $id
+     * @param int $userId
+     * @return int
+     */
+    public function categoryDelete(int $id, int $userId) {
+        $read = Dbasis::read("menu_categories", 'id = "'.$id.'" AND user_id = "'.$userId.'"');
+        if (!$read->num_rows) {
+            $delete = Dbasis::delete("menu_categories", 'id = "'.$id.'" AND user_id = "'.$userId.'"');
+            return $delete;
+        }
+        return 0;
     }
 }

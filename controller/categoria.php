@@ -44,6 +44,60 @@ switch ($acao) {
             }
         }
         break;
+    case 'request':
+        if ($post) {
+            $cat = $categoria->categoryRead($post["categoria"],$autUser["id"]);
+            if ($cat) {
+                echo '<div class="modal fade" id="excluir'.$cat["id"].'">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header border-bottom-0 py-2">
+                        <h5 class="modal-title">Excluir categoria <span class="alert-link">'.$cat["name"].'</span></h5>
+                        <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
+                          <i class="material-icons-outlined">close</i>
+                        </a>
+                      </div>
+                      <div class="modal-body">
+                      Excluir a respectiva categoria ira apagar todos os produtos atrelados a ela, deseja realmente excluir?
+                      </div>
+                      <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-grd-danger A_categoryDelete" data-category="'.$cat["id"].'" data-bs-dismiss="modal">Excluir</button>
+                        <button type="button" class="btn btn-grd-info">Cancelar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>';
+            }
+        }
+        break;
+    case 'excluir':
+        if ($post) {
+            $delete = $categoria->categoryDelete($post["categoria"],$autUser["id"]);
+            if ($delete) {
+                echo '<div class="alert alert-success border-0 bg-grd-success alert-dismissible fade show w-100" role="alert" id="A_alerta">
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-white"><span class="material-icons-outlined fs-2">check_circle</span>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-white">Exclusão realizada com sucesso!</h6>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+            }else {
+                echo '<div class="alert alert-warning border-0 bg-grd-warning alert-dismissible fade show w-100" role="alert" id="A_alerta">
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-white"><span class="material-icons-outlined fs-2">warning</span>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-white"><span class="alert-link">ERRO!</span> Falha na atualização, tente novamente ou entre em contato com o suporte.</h6>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+            }
+        }
+        break;
     
     default:
         if ($post) {

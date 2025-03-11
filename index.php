@@ -15,7 +15,7 @@ $sis->debug(true);
  */
 $autUser = $sis -> AutUser($_SESSION["AutUser"]["id"]);
 
-$sis->api();
+$sis->api($autUser);
 ?>
 <!doctype html>
 <html lang="pt-br" data-bs-theme="blue-theme">

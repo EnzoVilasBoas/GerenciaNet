@@ -252,7 +252,7 @@ class Sistema extends Dbasis
 	}
 
 	/** Método responsavel pelo tratamento da API*/
-	public function api()
+	public function api($autUser)
 	{
 
 		$param = $this->getParametros();

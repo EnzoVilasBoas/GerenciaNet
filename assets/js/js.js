@@ -19,45 +19,14 @@ $(document).ready(function() {
         });
     
     //
-    // EQUIPE
-    //
-        /**
-         * Funcao responsavel por questionar a exclusao do usuario
-         */
-        $('body').on('click', '.A_confirmaequipe', function () {
-            var usuario = $(this).attr('data-usr');
-            $.post(BASE + '/equipe/excluir/verificaexcluir/api', { usuario: usuario }, function (info) {
-                if (info) {
-                    $('.A_modal').html(info);
-                    $('#excluir'+usuario).modal('show');
-                    console.log(info);
-                }
-            });
-            return false;
-        });
-        /**
-         * Funcao responsavel por confirmar a exclusao do usuario
-         */
-        $('body').on('click', '.A_excluirequipe', function () {
-            var usuario = $(this).attr('data-usr');
-            $.post(BASE + '/equipe/excluir/confirmaexcluir/api', { usuario: usuario }, function (info) {
-                if (info) {
-                    $('.A_msg').html(info);
-                    $('#usuario'+usuario).fadeOut();
-                }
-            });
-            return false;
-        });
-    
-    //
     // CATEGORIA
     //
         /**
-         * Funcao responsavel por questionar a exclusao da categoria
+         * Funcao responsavel por rquisitar a exclusao da categoria
          */
-        $('body').on('click', '.A_confirmacategoria', function () {
-            var categoria = $(this).attr('data-cat');
-            $.post(BASE + '/categorias/excluir/verificaexcluir/api', { categoria: categoria }, function (info) {
+        $('body').on('click', '.A_categoryRequest', function () {
+            var categoria = $(this).attr('data-category');
+            $.post(BASE + '/categoria/request/api', { categoria: categoria }, function (info) {
                 if (info) {
                     $('.A_modal').html(info);
                     $('#excluir'+categoria).modal('show');
@@ -66,19 +35,22 @@ $(document).ready(function() {
             });
             return false;
         });
+
         /**
-         * Funcao responsavel por confirmar a exclusao da categoria
+         * Funcao responsavel por rquisitar a exclusao da categoria
          */
-        $('body').on('click', '.A_excluircategoria', function () {
-            var categoria = $(this).attr('data-cat');
-            $.post(BASE + '/categorias/excluir/confirmaexcluir/api', { categoria: categoria }, function (info) {
+        $('body').on('click', '.A_categoryDelete', function () {
+            var categoria = $(this).attr('data-category');
+            $.post(BASE + '/categoria/excluir/api', { categoria: categoria }, function (info) {
                 if (info) {
                     $('.A_msg').html(info);
-                    $('#categoria'+categoria).fadeOut();
+                    $('#category'+categoria).fadeOut();
+                    console.log(info);
                 }
             });
             return false;
         });
+        
 
     //
     // PRODUTOS

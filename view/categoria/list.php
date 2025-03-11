@@ -44,6 +44,7 @@
                             </div>
                             <?= $paginador ?>
                         </div>
+                        <div class="A_msg"></div>
                         <table class="table mb-0 table-hover">
                             <thead>
                                 <tr>
@@ -57,14 +58,14 @@
                                 <?php
                                     foreach ($lista as $l) {
                                         echo '
-                                        <tr>
+                                        <tr id="category'.$l["id"].'">
                                             <th scope="row">'.$l["id"].'</th>
                                             <td>'.$l["name"].'</td>
                                             <td>'. date('d/m/Y H:i:s', strtotime($l["created_at"])) .'</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="'.BASE.'/categoria/editar/'.$l["id"].'" class="btn btn-primary d-flex"><i class="material-icons-outlined">edit</i></a>
-                                                    <a class="btn btn-primary d-flex"><i class="material-icons-outlined">delete</i></a>
+                                                    <a class="btn btn-primary d-flex A_categoryRequest" data-category="'.$l["id"].'"><i class="material-icons-outlined">delete</i></a>
                                                 </div>
                                             </td>
                                         </tr>';
