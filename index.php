@@ -383,6 +383,13 @@ $sis->api($autUser);
               <div class="menu-title">Categorias</div>
             </a>
           </li>
+          <li>
+            <a href="<?= BASE ?>/produtos">
+              <div class="parent-icon"><i class="material-icons-outlined">sell</i>
+              </div>
+              <div class="menu-title">Produtos</div>
+            </a>
+          </li>
          </ul>
         <!--end navigation-->
     </div>
